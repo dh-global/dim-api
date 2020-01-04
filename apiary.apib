@@ -1,80 +1,45 @@
 FORMAT: 1A
-HOST: https://polls.apiblueprint.org/
 
-# DIM API （IM Server API）
+# DIM API（IM SERVER API）
+此分类下的API主要是给IM客户端调用，以完成产品业务，以所也可以称为**业务系统API**，以便与**IM系统API**区分开来。**业务系统API**同时也是IM客户端连接到IM服务端的**介绍人**，因为IM客户端必须依赖**业务系统API**提供的token才能使用**IM系统API**。
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+## 基本信息
 
-## Questions Collection [/questions]
++ 版本：v1
++ 定义时间：2019-12-16
++ 应用时间：2019-03-16
 
-### List All Questions [GET]
+## 基本约定
+
++ URL前缀：/1/api/v1/
++ 接口形态：Restful
++ Post：JSON
++ 返回：JSON
+
+## HTTP请求头
+
++ 需要验证的操作: **Authentication：JWT jwt-token**
+
+## 添加im用户 /im/addUser 
+
+### 列出所有用户 [POST]
+仅供管理员使用
+
+
 
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
-+ Request (application/json)
-
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
+    + Attributes (object)
+     
+        + user_id: 1441983590 (int64, required) - 用户id
+        + exp: 1441983590  (int64, required) - 过期时间
+      
+       
 
     + Body
-
+       
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "user_id": 1441983590,
+                "exp":1441983590
+                
             }
